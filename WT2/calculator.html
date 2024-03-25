@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Calculator</title>
+  <h1><center> Calculator</center> </h1>
+  <style>
+    #calculator {
+      width: 300px;
+      margin: auto;
+      margin-top: 50px;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+
+    input {
+      grid-column: span 3;
+      width: 90%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      text-align: right;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 1%;
+      border-radius: 15px;
+      background-color: chocolate;
+    
+    }
+    .operator {
+      background-color: #ff9900; 
+    }
+
+    button:hover {
+      background-color:white; 
+      color:black;
+      text-size-adjust:  none;
+
+
+    }
+  </style>
+</head>
+<body>
+
+<div id="calculator">
+  <input type="text" id="result" disabled>
+  <button onclick="deleteLast()" border-radius:25px  button-size:20px>X</button>
+  <button onclick="appendToResult('1')">1</button>
+  <button onclick="appendToResult('2')">2</button>
+  <button onclick="appendToResult('3')">3</button>
+  <button class="operator" onclick="appendToResult('+')">+</button>
+  <button onclick="appendToResult('4')">4</button>
+  <button onclick="appendToResult('5')">5</button>
+  <button onclick="appendToResult('6')">6</button>
+  <button class="operator" onclick="appendToResult('-')">-</button>
+  <button onclick="appendToResult('7')">7</button>
+  <button onclick="appendToResult('8')">8</button>
+  <button onclick="appendToResult('9')">9</button>
+  <button class="operator" onclick="appendToResult('*')">*</button>
+  <button onclick="appendToResult('0')">0</button>
+  <button class="operator" onclick="clearResult()">C</button>
+  <button class="operator" onclick="calculateResult()">=</button>
+  <button class="operator" onclick="appendToResult('/')">/</button>
+  
+</div>
+
+<script>
+  var inputArray = [];
+  function appendToResult(value) {
+    document.getElementById('result').value += value;
+  }
+
+  function clearResult() {
+    alert("Clearing the result!");
+    document.getElementById('result').value = '';
+    
+  }
+
+  function calculateResult() {
+    var confirmation = prompt("Are you sure you want to calculate the result? Type 'yes' to confirm.");
+    if (confirmation && confirmation.toLowerCase() === 'yes') {
+      try {
+        document.getElementById('result').value = eval(document.getElementById('result').value);
+      } catch (error) {
+        document.getElementById('result').value = 'Error';
+      }
+    }
+  }
+
+  function deleteLast() {
+    var currentInput = document.getElementById('result').value;
+    if (currentInput.length > 0) {
+      var lastChar = currentInput.slice(-1);
+      document.getElementById('result').value = currentInput.slice(0, -1);
+      inputArray.pop(); 
+    }
+  }
+</script>
+
+</body>
+</html>
